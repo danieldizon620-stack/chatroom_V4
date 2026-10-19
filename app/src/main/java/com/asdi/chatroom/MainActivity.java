@@ -219,7 +219,7 @@ public class MainActivity extends Activity {
           returningFromLogin = false;
           ticketViewRequested = false;
           // Mark the actual chat page for scoped, Android-only CSS.
-          view.evaluateJavascript("document.body.classList.add('asdi-android-chat-only')", null);
+          enforceChatOnly(view);
         }
         view.setVisibility(View.VISIBLE);
       }
@@ -271,6 +271,26 @@ public class MainActivity extends Activity {
     } catch (Exception ignored) { }
   }
 
+
+  // Hide server-rendered ticketing navigation. The server uses a shared header
+  // whose menu is still present even when the WebView opens chatroom.php.
+  // Remove only the known ticketing header/nav, never the chatroom panels.
+  private void enforceChatOnly(WebView view) {
+    String js = "(function(){" +
+      "if(!location.pathname.toLowerCase().endsWith('/chatroom.php'))return;" +
+      "document.body.classList.add('asdi-android-chat-only');" +
+      "function hideChrome(){" +
+      "document.querySelectorAll('header.top,nav.nav,nav.asdi-nav-clean,.asdi-nav-clean,.asdi-chat-taskbar,.asdi-chat-dock').forEach(function(el){el.style.setProperty('display','none','important');el.setAttribute('aria-hidden','true');});" +
+      "var room=document.getElementById('asdi-chat-workspace')||document.querySelector('.asdi-room');" +
+      "if(room){var el=room.parentElement;while(el&&el!==document.body){el.style.setProperty('max-width','100%','important');el.style.setProperty('width','100%','important');el.style.setProperty('margin','0','important');el.style.setProperty('padding','0','important');el=el.parentElement;}}" +
+      "}" +
+      "hideChrome();" +
+      "if(window.__asdiChromeObserver)window.__asdiChromeObserver.disconnect();" +
+      "window.__asdiChromeObserver=new MutationObserver(hideChrome);" +
+      "window.__asdiChromeObserver.observe(document.body,{childList:true,subtree:false});" +
+      "})()";
+    view.evaluateJavascript(js, null);
+  }
 
   private void pollChat() {
     if(web == null || web.getUrl() == null || !web.getUrl().startsWith(base)) return;

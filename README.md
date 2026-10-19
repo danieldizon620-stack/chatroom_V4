@@ -1,18 +1,12 @@
-# ASDI Android v3.31 — Chatroom only, phone responsive
+# ASDI Android v3.32 — Ticketing navigation removal fix
 
-**Android Studio/Gradle source project, not a compiled APK.**
+The screenshot shows the server-rendered `header.top` / `nav.nav.asdi-nav-clean` menu (Dashboard, Tickets, Ticket Management, Customers & Services, Inventory & Tracking, Tools, My Profile, Logout) above Chatroom. Earlier CSS only matched navigation as a direct child of `body`, so it missed menus wrapped in another element.
 
-## Changes
-- After login, the PHP site often redirects to `index.php`. The app now intercepts that dashboard navigation at page start, before rendering, and loads `chatroom.php` without relying on fragile header selectors.
-- Dashboard, ticketing menu, Tools tab, top navigation and chat tabs are hidden in the Android WebView. Group/Users panels and their collapse controls remain.
-- Chatroom occupies the phone viewport and adjusts to narrow phones; improved text and UI contrast.
-- Login page is still shown when signed out.
-- Existing new-ticket and chat alert polling remain available while the app is active.
+This version hides the exact shared header and navigation using descendant CSS selectors **and** removes their display via a chatroom-only JavaScript pass. It keeps Groups, Conversation and Users controls. It also expands the chatroom to the phone viewport. After authentication the WebView opens chatroom.php, not the dashboard.
 
-## Build
-1. Upload the Android project to GitHub.
-2. Run the workflow in `.github/workflows/build_apk.yml`.
-3. Download and install the resulting APK. Signing certificate must match existing app for an in-place update.
+## Build and install
+Upload the Android project to GitHub, run the workflow in `.github/workflows/build_apk.yml`, and install the built APK. You must actually install **v3.32**; merely updating PHP does not update the APK. A replacement install needs the same signing certificate as your installed app. On some devices, uninstalling an old debug-signed app may be required and can clear app-local data.
 
-## Limitations
-The app has not been compiled or tested on a phone in this environment. Actual layout depends on the PHP server's current HTML/CSS; if it differs from the included ASDI v3.30 source, some selectors may need adjustment. Alerts still require the server's mobile notification PHP endpoints and do not provide background push.
+No PHP System Upgrade is required. Server must run current ASDI Ticketing. Chat/ticket notifications continue to require the PHP endpoints included in `server/` and currently poll only while the app is active.
+
+This ZIP is Android **source**, not a compiled APK. ZIP integrity checked; Android compilation and physical-device display are not tested.

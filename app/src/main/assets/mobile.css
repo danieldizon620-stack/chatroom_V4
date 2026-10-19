@@ -47,3 +47,15 @@ body.asdi-android-chat-only button{touch-action:manipulation}
  body.asdi-android-chat-only #asdi-chat-workspace.asdi-groups-hidden{grid-template-columns:0px minmax(0,1fr)!important}
  body.asdi-android-chat-only .asdi-room-list h3{font-size:13px!important}
 }
+
+/* v3.32: match the real PHP shared header markup, regardless of DOM nesting. */
+body.asdi-android-chat-only header.top,
+body.asdi-android-chat-only nav.nav,
+body.asdi-android-chat-only nav.asdi-nav-clean,
+body.asdi-android-chat-only .asdi-nav-clean,
+body.asdi-android-chat-only .asdi-nav-group,
+body.asdi-android-chat-only .asdi-chat-taskbar,
+body.asdi-android-chat-only .asdi-chat-dock-button,
+body.asdi-android-chat-only .asdi-chat-taskbar,
+body.asdi-android-chat-only .asdi-nav-center {display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;overflow:hidden!important}
+body.asdi-android-chat-only #asdi-chat-workspace{height:100dvh!important;max-height:100dvh!important}
