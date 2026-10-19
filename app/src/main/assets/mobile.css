@@ -164,3 +164,36 @@ body.asdi-android-chat-only #asdi-chat-workspace{height:100dvh!important;max-hei
    overflow-y:auto!important
  }
 }
+
+/* v3.34 Bootstrap 5 mobile-responsive refinements; scoped to ASDI Chatroom. */
+html,body{min-width:0!important;max-width:100%!important;overflow-x:hidden!important;-webkit-text-size-adjust:100%}
+body.asdi-android-chat-only{margin:0!important;height:100dvh!important;overflow:hidden!important}
+@media(max-width:767.98px){
+ body.asdi-android-chat-only #asdi-chat-workspace{display:flex!important;flex-direction:column!important;
+   width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;
+   min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-main{flex:1 1 0!important;min-height:0!important;
+   width:100%!important;max-width:100%!important;overflow:hidden!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-title{flex:0 0 auto!important;min-height:52px!important;
+   padding:8px clamp(76px,22vw,100px)!important;font-size:clamp(13px,3.8vw,16px)!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-messages{flex:1 1 0!important;min-height:0!important;
+   overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;
+   padding:10px clamp(8px,3vw,16px) 12px!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose{flex:0 0 auto!important;min-width:0!important;
+   width:100%!important;max-width:100%!important;gap:clamp(3px,1.2vw,8px)!important;
+   padding:7px 8px calc(8px + env(safe-area-inset-bottom,0px))!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose textarea,
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose input{min-width:0!important;max-width:100%!important;
+   flex:1 1 auto!important;font-size:16px!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-bubble{max-width:min(82vw,350px)!important;
+   font-size:clamp(13px,3.7vw,15px)!important;overflow-wrap:anywhere!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-bubble img{max-width:min(60vw,240px)!important;
+   max-height:min(32dvh,240px)!important;object-fit:contain!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-list,
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-employees-panel{width:min(84vw,340px)!important;
+   max-width:calc(100vw - 20px)!important}
+}
+@media(max-width:359.98px){
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-title{font-size:13px!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose button{min-width:30px!important;min-height:32px!important}
+}
