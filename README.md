@@ -1,14 +1,18 @@
-# ASDI Chatroom Android v3.37 — Chrome layout parity
+# ASDI Chatroom Android v3.39 — Edge-to-edge approved preview
 
-This is an Android **source project**, not a compiled APK.
+Android source project for building an installable APK. The layout uses the live ASDI Ticketing v3.32+ Chrome chatroom and removes the 10px invisible border from v3.38.
 
-- Requires ASDI Ticketing server **v3.32 or newer** for the Chrome layout, hidden floating Chatroom button, and hidden footer.
-- Uses the server's responsive chatroom design without injecting Bootstrap or overriding chat bubbles, attachments, or Send bar.
-- Hides the website's ticketing navigation; opens chatroom after login.
-- Keeps chat/ticket notifications while app is active (requires the existing mobile notification PHP endpoints on the server).
-- Keeps existing app ID `com.asdi.chatroom`, versionCode 337.
+- Full phone-width chatroom, no centered narrow frame
+- No dashboard/tool navigation, footer or floating Chatroom shortcut
+- Keeps Groups, Users, chat background, message bubbles and bottom Send bar
+- After login opens chatroom.php
+- Preserves existing notification polling while the app is active
 
-## Build APK using GitHub Actions
-Upload the project contents (including `.github/workflows/build_apk.yml`) to a GitHub repository. Under Actions, run **Build ASDI Chatroom v3.37 APK**. Download artifact **ASDI-Chatroom-v3.37-APK**, containing `app-debug.apk`.
+## Build
+1. Upload the extracted project to a GitHub repository.
+2. Run **Actions > Build ASDI Chatroom v3.39 APK**.
+3. Download artifact **ASDI-Chatroom-v3.39-APK** containing app-debug.apk.
 
-The build environment here lacks the Android SDK/Gradle, so an installable APK cannot be produced or tested here. Installing over an existing app requires the same signing certificate. Debug APKs built on different runners may not share the same certificate.
+Install the ASDI Ticketing v3.32 server update first. Existing Android upgrades need the same signing certificate; a fresh GitHub debug key may not match the old APK.
+
+This is source code, not a compiled APK. Build and phone testing were not possible in this environment. The rendered preview is a design target, not a verified screenshot of the compiled app.
