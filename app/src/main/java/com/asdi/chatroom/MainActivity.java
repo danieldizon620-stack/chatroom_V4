@@ -220,6 +220,7 @@ public class MainActivity extends Activity {
           ticketViewRequested = false;
           // Mark the actual chat page for scoped, Android-only CSS.
           enforceChatOnly(view);
+          installMobileChatPanels(view);
         }
         view.setVisibility(View.VISIBLE);
       }
@@ -253,6 +254,23 @@ public class MainActivity extends Activity {
   }
   private boolean isChatUrl(String url) {
     return url != null && url.startsWith(base) && "chatroom.php".equals(Uri.parse(url).getLastPathSegment());
+  }
+
+  private void installMobileChatPanels(WebView view) {
+    String js = "(function(){if(!location.pathname.endsWith('/chatroom.php'))return;" +
+      "var room=document.getElementById('asdi-chat-workspace');if(!room||room.dataset.mobilePanelsReady)return;" +
+      "room.dataset.mobilePanelsReady='1';" +
+      "var groups=document.getElementById('asdi-show-groups'),users=document.getElementById('asdi-show-users');" +
+      "var groupPanel=room.querySelector('.asdi-room-list'),userPanel=room.querySelector('.asdi-employees-panel');" +
+      "if(!groups||!users)return;" +
+      "groups.hidden=false;users.hidden=false;" +
+      "function close(){room.classList.remove('asdi-mobile-groups-open','asdi-mobile-users-open');}" +
+      "groups.addEventListener('click',function(e){e.stopImmediatePropagation();var open=!room.classList.contains('asdi-mobile-groups-open');close();if(open)room.classList.add('asdi-mobile-groups-open');if(groupPanel)groupPanel.setAttribute('aria-hidden',String(!open));},true);" +
+      "users.addEventListener('click',function(e){e.stopImmediatePropagation();var open=!room.classList.contains('asdi-mobile-users-open');close();if(open)room.classList.add('asdi-mobile-users-open');if(userPanel)userPanel.setAttribute('aria-hidden',String(!open));},true);" +
+      "room.querySelectorAll('#asdi-hide-groups,#asdi-hide-users').forEach(function(b){b.addEventListener('click',function(e){e.stopImmediatePropagation();close();},true);});" +
+      "room.addEventListener('click',function(e){if(e.target.closest('.asdi-room-main')&&!e.target.closest('#asdi-show-groups,#asdi-show-users'))close();});" +
+      "})()";
+    view.evaluateJavascript(js,null);
   }
 
   private void applyMobileCss(WebView view) {
