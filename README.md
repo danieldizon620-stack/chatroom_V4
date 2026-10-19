@@ -1,14 +1,9 @@
-# ASDI Android v3.34 — Bootstrap 5 responsive mobile UI
+# ASDI Android v3.35 — 10% Smaller Mobile UI
 
-This is an Android WebView **source project**, not a compiled APK.
+The Chatroom interface is scaled to 90% of its previous visual size on phone-width screens. The layout compensates for scaling so the conversation still uses the phone's full width and height.
 
-- Loads Bootstrap 5.3.3 CSS from jsDelivr **only on the chatroom page**, with local responsive CSS fallback when the CDN is unavailable. An internet connection is needed to load Bootstrap itself.
-- Uses Bootstrap 5 utility classes for the chatroom container and conversation. Existing server-rendered ASDI markup is retained.
-- Responsive layout for OPPO Reno 15 5G and other Android screens using viewport-based widths instead of fixed physical pixels.
-- Keeps Groups and Users as slide-out drawers and Chatroom full screen.
-- Adjusts the keyboard resize behavior (`adjustResize`), bubble sizes, ASDI stickers, header, and message composer.
-- Retains chat/ticket polling while the app is open.
+Includes prior Bootstrap 5 responsiveness, chatroom-only navigation, slide-out Groups/Users, and notification polling.
 
-Build with the included GitHub Actions workflow, then install the resulting APK. Existing app updates require the same signing certificate. This project has not been compiled or tested on a physical Android phone.
+Build this Android **source** using the included GitHub Actions workflow. This ZIP is not a compiled APK. Upgrading an installed APK requires the same signing certificate.
 
-**Important:** Bootstrap cannot automatically make a PHP WebView application fully native. The mobile layout relies on targeted CSS and JS and may need adjustments if your server HTML changes.
+The ZIP was checked for integrity, but the Android APK has not been compiled or tested on an OPPO Reno 15 5G.

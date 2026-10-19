@@ -197,3 +197,18 @@ body.asdi-android-chat-only{margin:0!important;height:100dvh!important;overflow:
  body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-title{font-size:13px!important}
  body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose button{min-width:30px!important;min-height:32px!important}
 }
+
+/* v3.35: 10% smaller chat interface; retain full device viewport.
+   CSS zoom adjusts layout sizing, unlike transform:scale, so controls stay clickable. */
+@media(max-width:767.98px){
+ body.asdi-android-chat-only #asdi-chat-workspace{
+   zoom:.9!important;
+   width:111.111111vw!important;max-width:111.111111vw!important;
+   height:111.111111dvh!important;max-height:111.111111dvh!important;
+   min-height:0!important;
+ }
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-main{width:100%!important;max-width:100%!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose{width:100%!important;max-width:100%!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-bubble{max-width:82%!important}
+ body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-bubble img{max-width:min(62%,240px)!important}
+}
