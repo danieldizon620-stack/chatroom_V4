@@ -1,14 +1,14 @@
-# ASDI Android v3.36 — Composer and Attachment Menu Fix
+# ASDI Chatroom Android v3.37 — Chrome layout parity
 
-Android source project (not a compiled APK).
+This is an Android **source project**, not a compiled APK.
 
-- Replaces the previous 90%-zoom / 111%-width workaround that could cause horizontal overflow.
-- Fits the entire composer on one row: Attach, Emoji, Message field, **Send**.
-- Keeps messages scrollable in the remaining space; one mobile chat layout.
-- Closes attachment menu when tapping outside, focusing message input, opening emojis, submitting, or pressing Escape.
-- Preserves the existing server's send-message handler, photo/file picker, and ASDI chat features.
-- Retains dashboard navigation hiding and active-app notifications.
+- Requires ASDI Ticketing server **v3.32 or newer** for the Chrome layout, hidden floating Chatroom button, and hidden footer.
+- Uses the server's responsive chatroom design without injecting Bootstrap or overriding chat bubbles, attachments, or Send bar.
+- Hides the website's ticketing navigation; opens chatroom after login.
+- Keeps chat/ticket notifications while app is active (requires the existing mobile notification PHP endpoints on the server).
+- Keeps existing app ID `com.asdi.chatroom`, versionCode 337.
 
-Build with the included GitHub Actions workflow; install the resulting APK. Existing app upgrades require the same signing certificate.
+## Build APK using GitHub Actions
+Upload the project contents (including `.github/workflows/build_apk.yml`) to a GitHub repository. Under Actions, run **Build ASDI Chatroom v3.37 APK**. Download artifact **ASDI-Chatroom-v3.37-APK**, containing `app-debug.apk`.
 
-ZIP integrity checked; Android compilation and phone testing not performed. The server's current markup and styles can affect final behavior.
+The build environment here lacks the Android SDK/Gradle, so an installable APK cannot be produced or tested here. Installing over an existing app requires the same signing certificate. Debug APKs built on different runners may not share the same certificate.

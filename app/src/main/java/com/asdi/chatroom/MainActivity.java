@@ -220,8 +220,7 @@ public class MainActivity extends Activity {
           ticketViewRequested = false;
           // Mark the actual chat page for scoped, Android-only CSS.
           enforceChatOnly(view);
-          installMobileChatPanels(view);
-          installComposerFix(view);
+          // Preserve server-side Chrome layout; no Android-specific panel/composer overrides.
         }
         view.setVisibility(View.VISIBLE);
       }
@@ -301,7 +300,6 @@ public class MainActivity extends Activity {
       String js = "(function(){" +
         "var m=document.querySelector('meta[name=viewport]');if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}m.content='width=device-width,initial-scale=1,viewport-fit=cover';" +
         "if(location.pathname.endsWith('/chatroom.php'))document.body.classList.add('asdi-android-chat-only');" +
-        "if(location.pathname.endsWith('/chatroom.php')){var b=document.getElementById('asdi-bootstrap5');if(!b){b=document.createElement('link');b.id='asdi-bootstrap5';b.rel='stylesheet';b.href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css';document.head.appendChild(b);}}" +
         "var old=document.getElementById('asdi-mobile-css');if(old)old.remove();" +
         "var st=document.createElement('style');st.id='asdi-mobile-css';st.textContent=" + JSONObject.quote(css) + ";document.head.appendChild(st);" +
         "})()";
@@ -318,7 +316,7 @@ public class MainActivity extends Activity {
       "if(!location.pathname.toLowerCase().endsWith('/chatroom.php'))return;" +
       "document.body.classList.add('asdi-android-chat-only');" +
       "function hideChrome(){" +
-      "document.querySelectorAll('header.top,nav.nav,nav.asdi-nav-clean,.asdi-nav-clean,.asdi-chat-taskbar,.asdi-chat-dock').forEach(function(el){el.style.setProperty('display','none','important');el.setAttribute('aria-hidden','true');});" +
+      "document.querySelectorAll('header.top,nav.nav,nav.asdi-nav-clean,.asdi-nav-clean,.asdi-chat-taskbar,.asdi-chat-dock,footer,.site-footer').forEach(function(el){el.style.setProperty('display','none','important');el.setAttribute('aria-hidden','true');});" +
       "var room=document.getElementById('asdi-chat-workspace')||document.querySelector('.asdi-room');" +
       "if(room){var el=room.parentElement;while(el&&el!==document.body){el.style.setProperty('max-width','100%','important');el.style.setProperty('width','100%','important');el.style.setProperty('margin','0','important');el.style.setProperty('padding','0','important');el=el.parentElement;}}" +
       "}" +

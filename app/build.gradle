@@ -1,3 +1,3 @@
 plugins { id 'com.android.application' }
 android { namespace 'com.asdi.chatroom'; compileSdk 35
- defaultConfig { applicationId 'com.asdi.chatroom'; minSdk 26; targetSdk 35; versionCode 336; versionName '3.36' } }
+ defaultConfig { applicationId 'com.asdi.chatroom'; minSdk 26; targetSdk 35; versionCode 337; versionName '3.37' } }
