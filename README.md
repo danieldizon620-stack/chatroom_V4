@@ -1,9 +1,14 @@
-# ASDI Android v3.35 — 10% Smaller Mobile UI
+# ASDI Android v3.36 — Composer and Attachment Menu Fix
 
-The Chatroom interface is scaled to 90% of its previous visual size on phone-width screens. The layout compensates for scaling so the conversation still uses the phone's full width and height.
+Android source project (not a compiled APK).
 
-Includes prior Bootstrap 5 responsiveness, chatroom-only navigation, slide-out Groups/Users, and notification polling.
+- Replaces the previous 90%-zoom / 111%-width workaround that could cause horizontal overflow.
+- Fits the entire composer on one row: Attach, Emoji, Message field, **Send**.
+- Keeps messages scrollable in the remaining space; one mobile chat layout.
+- Closes attachment menu when tapping outside, focusing message input, opening emojis, submitting, or pressing Escape.
+- Preserves the existing server's send-message handler, photo/file picker, and ASDI chat features.
+- Retains dashboard navigation hiding and active-app notifications.
 
-Build this Android **source** using the included GitHub Actions workflow. This ZIP is not a compiled APK. Upgrading an installed APK requires the same signing certificate.
+Build with the included GitHub Actions workflow; install the resulting APK. Existing app upgrades require the same signing certificate.
 
-The ZIP was checked for integrity, but the Android APK has not been compiled or tested on an OPPO Reno 15 5G.
+ZIP integrity checked; Android compilation and phone testing not performed. The server's current markup and styles can affect final behavior.

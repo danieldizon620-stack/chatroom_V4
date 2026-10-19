@@ -221,6 +221,7 @@ public class MainActivity extends Activity {
           // Mark the actual chat page for scoped, Android-only CSS.
           enforceChatOnly(view);
           installMobileChatPanels(view);
+          installComposerFix(view);
         }
         view.setVisibility(View.VISIBLE);
       }
@@ -270,6 +271,23 @@ public class MainActivity extends Activity {
       "users.addEventListener('click',function(e){e.stopImmediatePropagation();var open=!room.classList.contains('asdi-mobile-users-open');close();if(open)room.classList.add('asdi-mobile-users-open');if(userPanel)userPanel.setAttribute('aria-hidden',String(!open));},true);" +
       "room.querySelectorAll('#asdi-hide-groups,#asdi-hide-users').forEach(function(b){b.addEventListener('click',function(e){e.stopImmediatePropagation();close();},true);});" +
       "room.addEventListener('click',function(e){if(e.target.closest('.asdi-room-main')&&!e.target.closest('#asdi-show-groups,#asdi-show-users'))close();});" +
+      "})()";
+    view.evaluateJavascript(js,null);
+  }
+
+  private void installComposerFix(WebView view) {
+    String js = "(function(){if(!location.pathname.endsWith('/chatroom.php'))return;" +
+      "var form=document.getElementById('asdi-room-send');if(!form||form.dataset.asdiComposerFixed)return;" +
+      "form.dataset.asdiComposerFixed='1';" +
+      "var menu=document.getElementById('asdi-attach-options'),toggle=document.getElementById('asdi-attach-menu-button');" +
+      "var emoji=document.getElementById('asdi-room-emoji-panel'),emojiButton=document.getElementById('asdi-room-emoji-button');" +
+      "function close(){if(menu){menu.hidden=true;}if(toggle)toggle.setAttribute('aria-expanded','false');}" +
+      "document.addEventListener('pointerdown',function(e){if(menu&&!menu.hidden&&!menu.contains(e.target)&&e.target!==toggle&&!toggle.contains(e.target))close();},true);" +
+      "document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});" +
+      "form.addEventListener('submit',function(){close();},true);" +
+      "var text=form.querySelector('textarea[name=message]');if(text){text.addEventListener('focus',close);}" +
+      "if(emojiButton)emojiButton.addEventListener('click',close,true);" +
+      "var send=form.querySelector('button[type=submit]');if(send){send.hidden=false;send.style.display='block';send.style.visibility='visible';}" +
       "})()";
     view.evaluateJavascript(js,null);
   }

@@ -198,17 +198,54 @@ body.asdi-android-chat-only{margin:0!important;height:100dvh!important;overflow:
  body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose button{min-width:30px!important;min-height:32px!important}
 }
 
-/* v3.35: 10% smaller chat interface; retain full device viewport.
-   CSS zoom adjusts layout sizing, unlike transform:scale, so controls stay clickable. */
-@media(max-width:767.98px){
- body.asdi-android-chat-only #asdi-chat-workspace{
-   zoom:.9!important;
-   width:111.111111vw!important;max-width:111.111111vw!important;
-   height:111.111111dvh!important;max-height:111.111111dvh!important;
-   min-height:0!important;
- }
- body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-main{width:100%!important;max-width:100%!important}
- body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-compose{width:100%!important;max-width:100%!important}
- body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-bubble{max-width:82%!important}
- body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-bubble img{max-width:min(62%,240px)!important}
+
+/* v3.36: one-screen composer fix, no zoom-induced overflow. */
+body.asdi-android-chat-only #asdi-chat-workspace{
+ zoom:1!important;width:100vw!important;max-width:100vw!important;
+ height:100dvh!important;max-height:100dvh!important;
+}
+body.asdi-android-chat-only #asdi-chat-workspace #asdi-room-send{
+ display:grid!important;grid-template-columns:34px 34px minmax(0,1fr) 54px!important;
+ grid-template-rows:minmax(40px,auto) auto!important;align-items:center!important;
+ column-gap:5px!important;row-gap:0!important;
+ flex-wrap:nowrap!important;overflow:visible!important;
+ padding:6px 7px max(8px,env(safe-area-inset-bottom))!important;
+ box-sizing:border-box!important;width:100%!important;max-width:100vw!important;
+ min-width:0!important;background:#fff!important;
+}
+body.asdi-android-chat-only #asdi-room-send #asdi-attach-menu-button{grid-column:1;grid-row:1}
+body.asdi-android-chat-only #asdi-room-send #asdi-room-emoji-button{grid-column:2;grid-row:1}
+body.asdi-android-chat-only #asdi-room-send textarea[name="message"]{
+ grid-column:3;grid-row:1;display:block!important;width:100%!important;
+ min-width:0!important;max-width:100%!important;min-height:38px!important;
+ height:38px!important;max-height:90px!important;box-sizing:border-box!important;
+ margin:0!important;padding:8px 10px!important;line-height:21px!important;
+ border:0!important;border-radius:20px!important;background:#f2f3f6!important;
+ color:#152033!important;font-size:14px!important;resize:none!important;
+}
+body.asdi-android-chat-only #asdi-room-send button[type="submit"]{
+ grid-column:4;grid-row:1;display:block!important;min-width:0!important;
+ width:54px!important;height:38px!important;min-height:38px!important;
+ padding:0 6px!important;border-radius:20px!important;background:#315df5!important;
+ color:#fff!important;font-size:12px!important;line-height:1!important;
+ opacity:1!important;visibility:visible!important;
+}
+body.asdi-android-chat-only #asdi-room-send #asdi-attachment-selected{
+ grid-column:1/-1;grid-row:2;min-width:0!important
+}
+body.asdi-android-chat-only #asdi-room-send #asdi-attach-options{
+ display:block;position:absolute!important;bottom:calc(100% + 6px)!important;
+ left:7px!important;z-index:100!important;max-width:calc(100vw - 14px)!important
+}
+body.asdi-android-chat-only #asdi-room-send #asdi-attach-options[hidden],
+body.asdi-android-chat-only #asdi-room-send #asdi-room-emoji-panel[hidden],
+body.asdi-android-chat-only #asdi-room-send #asdi-attachment-selected[hidden],
+body.asdi-android-chat-only #asdi-room-send [type="file"][hidden]{display:none!important}
+body.asdi-android-chat-only #asdi-room-send #asdi-room-emoji-panel{
+ position:absolute!important;bottom:calc(100% + 6px)!important;
+ left:5px!important;right:5px!important;z-index:101!important;
+ width:auto!important;max-height:40dvh!important;overflow:auto!important
+}
+body.asdi-android-chat-only #asdi-chat-workspace .asdi-room-messages{
+ min-height:0!important;flex:1 1 0!important;overflow-y:auto!important
 }
